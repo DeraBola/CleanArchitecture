@@ -57,7 +57,7 @@ public static class DependencyInjection
                     sqlOptions.MigrationsHistoryTable(HistoryRepository.DefaultTableName, "dbo")));
 
         services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<ApplicationDbContext>());
-
+ 
         return services;
     }
 
