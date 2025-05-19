@@ -11,6 +11,7 @@ internal static class ServiceCollectionExtensions
         {
             o.CustomSchemaIds(id => id.FullName!.Replace('+', '-'));
 
+            // Add Bearer token support
             var securityScheme = new OpenApiSecurityScheme
             {
                 Name = "JWT Authentication",

@@ -12,6 +12,7 @@ internal sealed class GetUserByIdQueryHandler(IApplicationDbContext context, IUs
 {
     public async Task<Result<UserResponse>> Handle(GetUserByIdQuery query, CancellationToken cancellationToken)
     {
+        // This checks if the user is trying to access someone else’s data 
         if (query.UserId != userContext.UserId)
         {
             return Result.Failure<UserResponse>(UserErrors.Unauthorized());
