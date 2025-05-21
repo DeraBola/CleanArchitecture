@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SharedKernel;
 
 namespace Domain.Images;
-internal class UserImageDomainEvent
-{
-}
+
+public sealed record UserImageCreatedDomainEvent(Guid UserImageId) : IDomainEvent;

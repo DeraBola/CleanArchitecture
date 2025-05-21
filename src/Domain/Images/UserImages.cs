@@ -1,10 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Images;
+using Domain.Users;
+using SharedKernel;
 
 namespace Domain.Images;
-internal class UserImageUrl
+
+public sealed class UserImages : Entity
 {
+    public Guid Id { get; set; }
+    public Guid UserId { get; set; }
+    public Uri ImageUrl { get; set; } = null!;
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+   // public User? User { get; set; } // Navigation property
 }

@@ -1,4 +1,5 @@
 ﻿using Application.Abstractions.Data;
+using Domain.Images;
 using Domain.Todos;
 using Domain.Users;
 using MediatR;
@@ -13,6 +14,8 @@ public sealed class ApplicationDbContext(DbContextOptions<ApplicationDbContext> 
     public DbSet<User> Users { get; set; }
 
     public DbSet<TodoItem> TodoItems { get; set; }
+
+    public DbSet<UserImages> UserImages { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

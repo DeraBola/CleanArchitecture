@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Abstractions.Messaging;
+using Domain.Todos;
 
-namespace Application.Images;
-internal class AddUserImageCommandHandler
+namespace Application.Images.AddImage;
+
+public sealed record AddUserImageCommand : ICommand<Guid>
 {
+    public Guid UserId { get; set; }
+    public Uri ImageUrl { get; set; }
 }

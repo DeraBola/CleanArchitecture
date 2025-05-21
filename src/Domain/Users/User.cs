@@ -1,6 +1,4 @@
-﻿
-
-using Domain.Images;
+﻿using Domain.Images;
 using SharedKernel;
 
 namespace Domain.Users;
@@ -13,5 +11,5 @@ public sealed class User : Entity
     public string LastName { get; set; }
     public string PasswordHash { get; set; }
 
-    public ICollection<UserImage> Images { get; set; } = new List<UserImage>();
+    public ICollection<UserImages> Images { get; set; } = new List<UserImages>();
 }
