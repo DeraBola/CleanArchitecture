@@ -18,7 +18,7 @@ internal sealed class Create : IEndpoint
     {
         app.MapPost("users/ImageUrl", async (Request request, ISender sender, CancellationToken cancellationToken) =>
         {
-            var command = new AddUserImageCommand
+            var command = new UploadUserImageCommand
             {
                 UserId = request.UserId,
                 ImageUrl = request.ImageUrl,
