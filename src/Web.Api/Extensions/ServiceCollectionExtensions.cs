@@ -40,6 +40,7 @@ internal static class ServiceCollectionExtensions
             };
 
             o.AddSecurityRequirement(securityRequirement);
+
         });
 
         return services;

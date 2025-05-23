@@ -20,7 +20,10 @@ builder.Services
 
 builder.Services.AddEndpoints(Assembly.GetExecutingAssembly());
 
+
 WebApplication app = builder.Build();
+
+//app.UseAntiforgery();
 
 app.MapEndpoints();
 

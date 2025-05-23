@@ -1,33 +1,45 @@
 ﻿using Application.Images.ImageUpload;
+using Domain.Users;
 using MediatR;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using SharedKernel;
+using Web.Api.Endpoints.Users;
 using Web.Api.Extensions;
 using Web.Api.Infrastructure;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Web.Api.Endpoints.UserImages;
 
-internal sealed class UploadImageData : IEndpoint
+internal sealed class UploadImageFile : IEndpoint
 {
-    public sealed class Request
-    {
-        public Guid UserId { get; set; }
-        public byte[]? ImageData { get; set; }
-    }
 
+    public sealed class UploadImageRequest
+    {
+        [FromForm]
+        public Guid UserId { get; set; }
+
+        [FromForm]
+        public IFormFile Image { get; set; } = null!;
+    }
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("users/FileUpload", async (Request request, ISender sender, CancellationToken cancellationToken) =>
+        app.MapPost("users/upload", async ([FromForm] UploadImageRequest request, ISender sender, CancellationToken cancellationToken) =>
         {
+            using var memoryStream = new MemoryStream();
+            await request.Image.CopyToAsync(memoryStream, cancellationToken);
+
             var command = new UploadUserImageCommand
             {
                 UserId = request.UserId,
-                ImageData = request.ImageData,
+                ImageData = memoryStream.ToArray()
             };
 
             Result<Guid> result = await sender.Send(command, cancellationToken);
-
             return result.Match(Results.Ok, CustomResults.Problem);
         })
+         .DisableAntiforgery()
+        .Accepts<UploadImageRequest>("multipart/form-data")
         .WithTags(Tags.Images)
         .RequireAuthorization();
     }
