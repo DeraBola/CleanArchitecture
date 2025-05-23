@@ -1,4 +1,4 @@
-﻿using Application.Images.AddImage;
+﻿using Application.Images.ImageUpload;
 using MediatR;
 using SharedKernel;
 using Web.Api.Extensions;
@@ -6,22 +6,22 @@ using Web.Api.Infrastructure;
 
 namespace Web.Api.Endpoints.UserImages;
 
-internal sealed class Create : IEndpoint
+internal sealed class UploadImageData : IEndpoint
 {
     public sealed class Request
     {
         public Guid UserId { get; set; }
-        public Uri ImageUrl { get; set; }
+        public byte[]? ImageData { get; set; }
     }
 
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("users/ImageUrl", async (Request request, ISender sender, CancellationToken cancellationToken) =>
+        app.MapPost("users/FileUpload", async (Request request, ISender sender, CancellationToken cancellationToken) =>
         {
-            var command = new AddUserImageCommand
+            var command = new UploadUserImageCommand
             {
                 UserId = request.UserId,
-                ImageUrl = request.ImageUrl,
+                ImageData = request.ImageData,
             };
 
             Result<Guid> result = await sender.Send(command, cancellationToken);

@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using SharedKernel;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
-namespace Application.Images.AddImage;
+namespace Application.Images.ImageUpload;
 
-internal sealed class AddUserImageCommandHandler(IApplicationDbContext context, 
+internal sealed class UploadUserImageCommandHandler(IApplicationDbContext context, 
     IDateTimeProvider dateTimeProvider,
     IUserContext userContext)
-    : ICommandHandler<AddUserImageCommand, Guid>
+    : ICommandHandler<UploadUserImageCommand, Guid>
 {
-    public async Task<Result<Guid>> Handle(AddUserImageCommand command, CancellationToken cancellationToken)
+    public async Task<Result<Guid>> Handle(UploadUserImageCommand command, CancellationToken cancellationToken)
     {
         if (userContext.UserId != command.UserId)
         {
@@ -36,7 +36,7 @@ internal sealed class AddUserImageCommandHandler(IApplicationDbContext context,
         {
             Id = Guid.NewGuid(),
             UserId = user.Id,
-            ImageUrl = command.ImageUrl,
+            ImageData = command.ImageData,
             CreatedAt = dateTimeProvider.UtcNow
         };
 

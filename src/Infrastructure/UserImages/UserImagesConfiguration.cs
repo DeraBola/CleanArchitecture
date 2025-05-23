@@ -16,5 +16,10 @@ internal sealed class UserImageConfiguration : IEntityTypeConfiguration<UserImag
 
         builder.Property(x => x.ImageUrl)
             .IsRequired();
+
+        builder.Property(x => x.ImageData)
+            .HasColumnType("varbinary(max)") // For SQL Server
+            .IsRequired(false);              // Optional if not every record has it
+
     }
 }

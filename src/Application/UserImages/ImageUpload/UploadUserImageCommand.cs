@@ -1,10 +1,10 @@
 ﻿using Application.Abstractions.Messaging;
 using Domain.Todos;
 
-namespace Application.Images.AddImage;
+namespace Application.Images.ImageUpload;
 
-public sealed record AddUserImageCommand : ICommand<Guid>
+public sealed record UploadUserImageCommand : ICommand<Guid>
 {
     public Guid UserId { get; set; }
-    public Uri ImageUrl { get; set; }
+    public byte[]? ImageData { get; set; }
 }
