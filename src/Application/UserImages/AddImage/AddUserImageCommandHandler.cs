@@ -32,7 +32,7 @@ internal sealed class AddUserImageCommandHandler(IApplicationDbContext context,
             return Result.Failure<Guid>(UserErrors.NotFound(command.UserId));
         }
 
-        var image = new UserImages
+        var image = new UserImage
         {
             Id = Guid.NewGuid(),
             UserId = user.Id,

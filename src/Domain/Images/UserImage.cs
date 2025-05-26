@@ -4,7 +4,7 @@ using SharedKernel;
 
 namespace Domain.Images;
 
-public sealed class UserImages : Entity
+public sealed class UserImage : Entity
 {
     public Guid Id { get; set; }
     public Guid UserId { get; set; }

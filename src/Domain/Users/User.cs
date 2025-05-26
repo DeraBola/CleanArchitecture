@@ -11,5 +11,5 @@ public sealed class User : Entity
     public string LastName { get; set; }
     public string PasswordHash { get; set; }
 
-    public ICollection<UserImages> Images { get; set; } = new List<UserImages>();
+    public ICollection<UserImage> Images { get; set; } = new List<UserImage>();
 }

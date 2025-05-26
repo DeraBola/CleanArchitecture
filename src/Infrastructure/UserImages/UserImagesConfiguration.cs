@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Images;
 
-internal sealed class UserImageConfiguration : IEntityTypeConfiguration<UserImages>
+internal sealed class UserImageConfiguration : IEntityTypeConfiguration<UserImage>
 {
-    public void Configure(EntityTypeBuilder<UserImages> builder)
+    public void Configure(EntityTypeBuilder<UserImage> builder)
     {
         builder.HasKey(x => x.Id);
 

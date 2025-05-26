@@ -15,7 +15,7 @@ public sealed class ApplicationDbContext(DbContextOptions<ApplicationDbContext> 
 
     public DbSet<TodoItem> TodoItems { get; set; }
 
-    public DbSet<UserImages> UserImages { get; set; }
+    public DbSet<UserImage> UserImages { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

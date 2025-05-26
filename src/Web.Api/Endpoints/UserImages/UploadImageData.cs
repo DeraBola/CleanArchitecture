@@ -1,5 +1,6 @@
 ﻿using Application.Images.ImageUpload;
 using Domain.Users;
+using Infrastructure.UserImages.ImageStorage;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -21,18 +22,29 @@ internal sealed class UploadImageFile : IEndpoint
 
         [FromForm]
         public IFormFile Image { get; set; } = null!;
+        [FromForm]
+        public Uri ImageUrl { get; set; } = null!;
     }
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("users/upload", async ([FromForm] UploadImageRequest request, ISender sender, CancellationToken cancellationToken) =>
+        app.MapPost("users/upload", async ([FromForm] UploadImageRequest request, 
+            ISender sender,
+             ICloudinaryService cloudinaryService,
+            CancellationToken cancellationToken) =>
         {
             using var memoryStream = new MemoryStream();
             await request.Image.CopyToAsync(memoryStream, cancellationToken);
 
+            byte[] imageBytes = memoryStream.ToArray();
+
+            Uri cloudinaryUrl = await cloudinaryService.UploadImageAsync(imageBytes, request.Image.FileName);
+
+
             var command = new UploadUserImageCommand
             {
                 UserId = request.UserId,
-                ImageData = memoryStream.ToArray()
+                ImageData = memoryStream.ToArray(),
+                ImageUrl = cloudinaryUrl
             };
 
             Result<Guid> result = await sender.Send(command, cancellationToken);

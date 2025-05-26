@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Infrastructure.UserImages.ImageStorage;
-internal interface ICloudinary
+public interface ICloudinaryService
 {
+    Task<Uri> UploadImageAsync(byte[] imageData, string fileName);
 }

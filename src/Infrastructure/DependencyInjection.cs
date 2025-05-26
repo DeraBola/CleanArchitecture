@@ -5,6 +5,7 @@ using Infrastructure.Authentication;
 using Infrastructure.Authorization;
 using Infrastructure.Database;
 using Infrastructure.Time;
+using Infrastructure.UserImages.ImageStorage;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +32,8 @@ public static class DependencyInjection
     private static IServiceCollection AddServices(this IServiceCollection services)
     {
         services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
+
+        services.AddScoped<ICloudinaryService, CloudinaryService>();
 
         return services;
     }
