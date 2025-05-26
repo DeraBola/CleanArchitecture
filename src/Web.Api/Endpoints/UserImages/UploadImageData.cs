@@ -22,12 +22,12 @@ internal sealed class UploadImageFile : IEndpoint
 
         [FromForm]
         public IFormFile Image { get; set; } = null!;
-        [FromForm]
-        public Uri ImageUrl { get; set; } = null!;
+        //  [FromForm]
+        // public Uri ImageUrl { get; set; } = null!;
     }
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("users/upload", async ([FromForm] UploadImageRequest request, 
+        app.MapPost("users/upload", async ([FromForm] UploadImageRequest request,
             ISender sender,
              ICloudinaryService cloudinaryService,
             CancellationToken cancellationToken) =>
@@ -43,12 +43,18 @@ internal sealed class UploadImageFile : IEndpoint
             var command = new UploadUserImageCommand
             {
                 UserId = request.UserId,
-                ImageData = memoryStream.ToArray(),
-                ImageUrl = cloudinaryUrl
+                ImageData = memoryStream.ToArray()
             };
 
             Result<Guid> result = await sender.Send(command, cancellationToken);
-            return result.Match(Results.Ok, CustomResults.Problem);
+            return result.Match(
+        id => Results.Ok(new
+        {
+            Id = id,
+            ImageUrl = cloudinaryUrl
+        }),
+        CustomResults.Problem);
+            //  return result.Match(Results.Ok, CustomResults.Problem);
         })
          .DisableAntiforgery()
         .Accepts<UploadImageRequest>("multipart/form-data")

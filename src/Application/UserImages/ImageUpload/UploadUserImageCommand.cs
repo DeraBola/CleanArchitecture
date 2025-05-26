@@ -7,5 +7,5 @@ public sealed record UploadUserImageCommand : ICommand<Guid>
 {
     public Guid UserId { get; set; }
     public byte[]? ImageData { get; set; }
-    public Uri ImageUrl { get; set; }
+   // public Uri ImageUrl { get; set; }
 }
