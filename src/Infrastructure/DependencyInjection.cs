@@ -67,15 +67,16 @@ public static class DependencyInjection
 
     private static IServiceCollection AddHealthChecks(this IServiceCollection services, IConfiguration configuration)
     {
-        /* services
+        services
              .AddHealthChecks()
              .AddNpgSql(configuration.GetConnectionString("Database")!);
-        */
+        
+        //FOR SQL
 
-        services
+     /*   services
        .AddHealthChecks()
        .AddSqlServer(configuration.GetConnectionString("Database")!);
-
+     */
         return services;
     }
 
