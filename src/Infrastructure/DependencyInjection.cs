@@ -40,7 +40,7 @@ public static class DependencyInjection
 
     private static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
     {
-        /*
+        
     string? connectionString = configuration.GetConnectionString("Database");
 
     services.AddDbContext<ApplicationDbContext>(
@@ -50,9 +50,9 @@ public static class DependencyInjection
             .UseSnakeCaseNamingConvention());
 
     services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<ApplicationDbContext>());
-    */
+    
 
-        string? connectionString = configuration.GetConnectionString("Database");
+      /*  string? connectionString = configuration.GetConnectionString("Database");
 
         services.AddDbContext<ApplicationDbContext>(
             options => options
@@ -60,7 +60,7 @@ public static class DependencyInjection
                     sqlOptions.MigrationsHistoryTable(HistoryRepository.DefaultTableName, "dbo")));
 
         services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<ApplicationDbContext>());
- 
+ */
         return services;
     }
 
