@@ -37,6 +37,7 @@ internal sealed class UploadUserImageCommandHandler(IApplicationDbContext contex
             Id = Guid.NewGuid(),
             UserId = user.Id,
             ImageData = command.ImageData,
+            ImageUrl = command.ImageUrl,
             CreatedAt = dateTimeProvider.UtcNow
         };
 
