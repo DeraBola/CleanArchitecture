@@ -18,7 +18,7 @@ internal sealed class UserImageConfiguration : IEntityTypeConfiguration<UserImag
 
         builder.Property(x => x.ImageData)
            // .HasColumnType("varbinary(max)") // For SQL Server
-           .HasColumnType("bytea")
+           .HasColumnType("bytea")   //Forr Postgress
             .IsRequired(false);            
 
     }

@@ -2,5 +2,5 @@
 
 internal static class Schemas
 {
-    public const string Default = "app";
+    public const string Default = "public";
 }
