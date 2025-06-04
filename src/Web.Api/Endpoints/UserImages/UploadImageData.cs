@@ -22,8 +22,6 @@ internal sealed class UploadImageFile : IEndpoint
 
         [FromForm]
         public IFormFile Image { get; set; } = null!;
-        //  [FromForm]
-        // public Uri ImageUrl { get; set; } = null!;
     }
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
