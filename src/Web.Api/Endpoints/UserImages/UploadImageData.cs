@@ -44,7 +44,7 @@ internal sealed class UploadImageFile : IEndpoint
             {
                 UserId = request.UserId,
                 ImageData = memoryStream.ToArray(),
-                ImageUrl = cloudinaryUrl.ToString()
+                ImageUrl = cloudinaryUrl
             };
 
             Result<Guid> result = await sender.Send(command, cancellationToken);

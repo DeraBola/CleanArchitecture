@@ -36,7 +36,7 @@ internal sealed class AddUserImageCommandHandler(IApplicationDbContext context,
         {
             Id = Guid.NewGuid(),
             UserId = user.Id,
-            ImageUrl = command.ImageUrl,
+            ImageUrl = command.ImageUrl.ToString(),
             CreatedAt = dateTimeProvider.UtcNow
         };
 

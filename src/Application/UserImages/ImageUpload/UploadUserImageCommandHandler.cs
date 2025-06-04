@@ -5,6 +5,7 @@ using Application.Abstractions.Data;
 using Application.Abstractions.Messaging;
 using Domain.Images;
 using Domain.Users;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using SharedKernel;
@@ -32,20 +33,20 @@ internal sealed class UploadUserImageCommandHandler(IApplicationDbContext contex
             return Result.Failure<Guid>(UserErrors.NotFound(command.UserId));
         }
 
-        var image = new UserImage
+        var userImage = new UserImage
         {
             Id = Guid.NewGuid(),
             UserId = user.Id,
             ImageData = command.ImageData,
-            ImageUrl = command.ImageUrl,
+            ImageUrl = command.ImageUrl.ToString(),
             CreatedAt = dateTimeProvider.UtcNow
         };
 
         // Step 3: Add to DB and save
-        context.UserImages.Add(image);
+        context.UserImages.Add(userImage);
         await context.SaveChangesAsync(cancellationToken);
 
         // Step 4: Return result
-        return Result.Success(image.Id);
+        return Result.Success(userImage.Id);
     }
 }
