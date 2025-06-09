@@ -53,7 +53,6 @@ internal sealed class UploadImageFile : IEndpoint
             ImageUrl = cloudinaryUrl
         }),
         CustomResults.Problem);
-            //  return result.Match(Results.Ok, CustomResults.Problem);
         })
          .DisableAntiforgery()
         .Accepts<UploadImageRequest>("multipart/form-data")
