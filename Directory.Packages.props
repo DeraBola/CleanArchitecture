@@ -11,7 +11,7 @@
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Abstractions" Version="8.0.15" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.15" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.15" />
-    <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.7.0.110445" />
+    <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.15.0.120848" />
     <!-- SharedKernel -->
     <PackageVersion Include="MediatR.Contracts" Version="2.0.1" />
     <!-- Application -->
